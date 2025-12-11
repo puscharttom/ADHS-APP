@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoic ADHS App</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Stoischer Tagesstart</h1>
+
+    <div class="section">
+        <label>🎯 Deine eine Aufgabe heute</label>
+        <input id="task" type="text" placeholder="Eine einzige Sache ..." />
+    </div>
+
+    <div class="section">
+        <label>⚖️ Was liegt in deiner Kontrolle?</label>
+        <textarea id="control"></textarea>
+    </div>
+
+    <div class="section">
+        <label>⚡ Deine ADHS-Falle heute</label>
+        <textarea id="adhdTrap"></textarea>
+    </div>
+
+    <div class="section">
+        <label>🛡️ Wie reagierst du, wenn die Falle kommt?</label>
+        <textarea id="response"></textarea>
+    </div>
+
+    <button id="save">Speichern</button>
+
+    <hr>
+
+    <h2>Tools</h2>
+
+    <button onclick="startTimer(120)">⏱️ 2-Minuten-Start</button>
+    <button onclick="startCountdown()">🔟 10-Sekunden-Mut</button>
+    <button onclick="breath()">🌬️ 1 Atemzug</button>
+
+    <div id="timerDisplay"></div>
+
+    <hr>
+
+    <h2>Abend-Review</h2>
+
+    <div class="section">
+        <label>✨ Was lief gut?</label>
+        <textarea id="eveningGood"></textarea>
+    </div>
+
+    <div class="section">
+        <label>🧠 Wo hast du dir Bullshit erzählt?</label>
+        <textarea id="eveningBullshit"></textarea>
+    </div>
+
+    <div class="section">
+        <label>📌 Wie willst du morgen handeln?</label>
+        <textarea id="eveningPlan"></textarea>
+    </div>
+
+    <button id="saveEvening">Evening speichern</button>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
