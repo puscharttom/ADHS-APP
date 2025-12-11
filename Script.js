@@ -1,75 +1,61 @@
-// Auto-load fields
-const fields = [
-    "task", "control", "adhdTrap", "response",
-    "eveningGood", "eveningBullshit", "eveningPlan"
-];
+// ----------- Load Fields -----------
+const fields = ["task","control","adhdTrap","response","eveningGood","eveningBullshit","eveningPlan"];
 
 window.onload = () => {
     fields.forEach(loadField);
     loadHistory();
+    setupChart();
 };
 
-// Save & load
+// ----------- Local Storage ----------
 function saveField(id) {
     localStorage.setItem(id, document.getElementById(id).value);
 }
 
 function loadField(id) {
-    const value = localStorage.getItem(id);
-    if (value) document.getElementById(id).value = value;
+    const v = localStorage.getItem(id);
+    if (v) document.getElementById(id).value = v;
 }
 
-// Save morning + history entry
+// Save Morning + Evening
 document.getElementById("saveMorning").onclick = () => {
-    fields.slice(0, 4).forEach(saveField);
-    addHistoryEntry("morning");
+    fields.slice(0,4).forEach(saveField);
+    addHistory("morning");
     alert("Morgen gespeichert!");
 };
 
 document.getElementById("saveEvening").onclick = () => {
     fields.slice(4).forEach(saveField);
-    addHistoryEntry("evening");
+    addHistory("evening");
     alert("Abend gespeichert!");
 };
 
-function addHistoryEntry(type) {
-    const date = new Date().toLocaleDateString();
+// ----------- History ----------
+function addHistory(type) {
     let history = JSON.parse(localStorage.getItem("history") || "[]");
-
     history.push({
-        date,
-        type,
-        task: document.getElementById("task").value,
-        good: document.getElementById("eveningGood").value
+        date: new Date().toLocaleDateString(),
+        type: type,
+        good: document.getElementById("eveningGood").value.length
     });
-
     localStorage.setItem("history", JSON.stringify(history));
     loadHistory();
+    updateChart();
 }
 
 function loadHistory() {
-    const list = document.getElementById("historyList");
-    list.innerHTML = "";
-
-    const history = JSON.parse(localStorage.getItem("history") || "[]");
-
-    history.forEach(entry => {
-        const li = document.createElement("li");
-        li.textContent = `${entry.date} – ${entry.type}`;
-        list.appendChild(li);
-    });
+    return JSON.parse(localStorage.getItem("history") || "[]");
 }
 
-// Tools
-let timerInterval;
+// ----------- Tools ----------
+let timer;
 
-function startTimer(seconds) {
-    clearInterval(timerInterval);
-    let t = seconds;
-
-    timerInterval = setInterval(() => {
+function startTimer(sec) {
+    clearInterval(timer);
+    let t = sec;
+    timer = setInterval(() => {
         document.getElementById("timerDisplay").innerText = t + "s";
-        if (t <= 0) clearInterval(timerInterval);
+        if (t <= 0) clearInterval(timer);
         t--;
     }, 1000);
 }
@@ -79,24 +65,51 @@ function startCountdown() {
 }
 
 function breath() {
-    document.getElementById("timerDisplay").innerText = "Einatmen...";
-    setTimeout(() => document.getElementById("timerDisplay").innerText = "Ausatmen...", 1500);
-    setTimeout(() => document.getElementById("timerDisplay").innerText = "", 3000);
+    const el = document.getElementById("timerDisplay");
+    el.innerText = "Einatmen...";
+    setTimeout(() => el.innerText = "Ausatmen...", 1500);
+    setTimeout(() => el.innerText = "", 3000);
 }
 
-// Focus mode
+// ----------- Focus Mode -----------
 document.getElementById("focusToggle").onclick = () => {
     document.body.classList.toggle("focus-mode");
 };
 
-// Export history
+// ----------- Export ----------
 function exportHistory() {
-    let history = localStorage.getItem("history");
-    const blob = new Blob([history], {type: "application/json"});
-    const url = URL.createObjectURL(blob);
-
+    const h = localStorage.getItem("history");
+    const blob = new Blob([h], {type: "application/json"});
     const a = document.createElement("a");
-    a.href = url;
-    a.download = "adhs_stoic_history.json";
+    a.href = URL.createObjectURL(blob);
+    a.download = "adhs_history.json";
     a.click();
+}
+
+// ----------- Chart.js Visualization ----------
+let chart;
+
+function setupChart() {
+    const ctx = document.getElementById('historyChart');
+    chart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: [],
+            datasets: [{
+                label: "Wie oft du stolz warst (Länge des Textes)",
+                data: [],
+                borderColor: "#3b82f6",
+                backgroundColor: "rgba(59,130,246,0.2)",
+                tension: 0.3
+            }]
+        }
+    });
+    updateChart();
+}
+
+function updateChart() {
+    const history = loadHistory();
+    chart.data.labels = history.map(h => h.date);
+    chart.data.datasets[0].data = history.map(h => h.good);
+    chart.update();
 }
