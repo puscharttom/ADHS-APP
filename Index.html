@@ -4,72 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADHS Stoic App</title>
-    <link rel="stylesheet" href="style.css">
 
-    <!-- PWA optional -->
+    <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
 <header>
-    <h1>Stoic ADHS App</h1>
-    <button id="focusToggle">🎯 Fokusmodus</button>
+    <h1>Stoic ADHS</h1>
+    <button id="focusToggle">🎯 Fokus</button>
 </header>
 
 <main>
 
-    <!-- MORNING SECTION -->
-    <section class="card" id="morningCard">
+    <!-- MORNING ROUTINE -->
+    <section class="card">
         <h2>Morgens</h2>
 
-        <label>🎯 Eine Aufgabe heute</label>
-        <input id="task" placeholder="Was ist das Wichtigste heute?">
+        <label>🎯 Eine Aufgabe</label>
+        <input id="task" placeholder="Was ist heute das Wichtigste?">
 
-        <label>⚖️ Was liegt in deiner Kontrolle?</label>
-        <textarea id="control" placeholder="Nur das, was du direkt beeinflussen kannst ..."></textarea>
+        <label>⚖️ Kontrollierbar</label>
+        <textarea id="control"></textarea>
 
-        <label>⚡ Deine ADHS-Falle heute</label>
-        <textarea id="adhdTrap" placeholder="Ablenkung? Prokrastination? Perfektionismus?"></textarea>
+        <label>⚡ ADHS-Falle</label>
+        <textarea id="adhdTrap"></textarea>
 
-        <label>🛡️ Wie reagierst du, wenn sie kommt?</label>
-        <textarea id="response" placeholder="Mini-Plan, wie du ruhig bleibst ..."></textarea>
+        <label>🛡️ Reaktion</label>
+        <textarea id="response"></textarea>
 
-        <button class="saveBtn" id="saveMorning">💾 Morgen speichern</button>
+        <button class="saveBtn" id="saveMorning">💾 Speichern</button>
     </section>
 
-    <!-- TOOLS SECTION -->
+    <!-- Tools -->
     <section class="card">
         <h2>Tools</h2>
 
-        <button onclick="startTimer(120)">⏱️ 2-Minuten-Start</button>
-        <button onclick="startCountdown()">🔟 10-Sekunden-Mut</button>
-        <button onclick="breath()">🌬️ Atem-Reset</button>
+        <button onclick="startTimer(120)">⏱️ 2 Minuten</button>
+        <button onclick="startCountdown()">🔟 Mut-Countdown</button>
+        <button onclick="breath()">🌬️ Atemzug</button>
 
         <div id="timerDisplay"></div>
     </section>
 
-    <!-- EVENING SECTION -->
+    <!-- EVENING REVIEW -->
     <section class="card">
-        <h2>Abend-Review</h2>
+        <h2>Abend</h2>
 
-        <label>✨ Was lief gut?</label>
-        <textarea id="eveningGood" placeholder="Worauf bist du stolz?"></textarea>
+        <label>✨ Was war gut?</label>
+        <textarea id="eveningGood"></textarea>
 
-        <label>🧠 Wo hast du dir Quatsch erzählt?</label>
-        <textarea id="eveningBullshit" placeholder="Ehrlich, aber nicht streng."></textarea>
+        <label>🧠 Wo war Bullshit?</label>
+        <textarea id="eveningBullshit"></textarea>
 
-        <label>📌 Wie willst du morgen handeln?</label>
-        <textarea id="eveningPlan" placeholder="Ein kleiner Schritt reicht."></textarea>
+        <label>📌 Morgen besser?</label>
+        <textarea id="eveningPlan"></textarea>
 
-        <button class="saveBtn" id="saveEvening">💾 Abend speichern</button>
+        <button class="saveBtn" id="saveEvening">💾 Speichern</button>
     </section>
 
-    <!-- HISTORY SECTION -->
+    <!-- HISTORY VISUALIZATION -->
     <section class="card">
-        <h2>Tagebuch</h2>
-        <button onclick="exportHistory()">📤 Verlauf exportieren</button>
-        <ul id="historyList"></ul>
+        <h2>Dein Verlauf</h2>
+
+        <canvas id="historyChart" height="200"></canvas>
+
+        <button onclick="exportHistory()">📤 Exportieren</button>
     </section>
 
 </main>
