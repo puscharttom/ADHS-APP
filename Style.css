@@ -1,0 +1,53 @@
+body {
+    background: #111;
+    color: #eee;
+    font-family: system-ui, sans-serif;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.section {
+    margin-bottom: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    background: #222;
+    border: 1px solid #444;
+    color: #eee;
+    border-radius: 6px;
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background: #3a6df0;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2b56c9;
+}
+
+#timerDisplay {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+}
