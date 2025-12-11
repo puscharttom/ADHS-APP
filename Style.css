@@ -1,6 +1,6 @@
 body {
-    background: #111;
-    color: #eee;
+    background: #0b0b0d;
+    color: #e5e5e7;
     font-family: system-ui, sans-serif;
     margin: 0;
     padding: 0;
@@ -8,75 +8,76 @@ body {
 
 header {
     text-align: center;
-    padding: 15px;
-    background: #1a1a1a;
-    border-bottom: 1px solid #333;
+    padding: 20px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 h1 {
     margin: 0;
+    font-size: 26px;
+    letter-spacing: 1px;
+    color: #3b82f6;
 }
 
 main {
-    padding: 20px;
+    padding: 18px;
 }
 
 .card {
-    background: #1a1a1a;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
     padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #333;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 25px rgba(0,0,0,0.25);
 }
 
 label {
-    margin-top: 10px;
+    margin-top: 12px;
     display: block;
     font-weight: 600;
+    color: #9fc0ff;
 }
 
 input, textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    background: #222;
-    color: #eee;
-    border: 1px solid #444;
-    border-radius: 8px;
+    padding: 12px;
+    margin-top: 6px;
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    font-size: 15px;
+    resize: none;
 }
 
 button {
     width: 100%;
-    padding: 12px;
-    background: #3a6df0;
+    padding: 14px;
+    background: #3b82f6;
     border: none;
-    border-radius: 8px;
     color: white;
+    border-radius: 10px;
     margin-top: 10px;
-    cursor: pointer;
     font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
 button:hover {
-    background: #2d56c7;
+    background: #1d4ed8;
 }
 
 #timerDisplay {
-    margin-top: 20px;
     text-align: center;
-    font-size: 24px;
-}
-
-#focusToggle {
-    margin-top: 10px;
-    background: #444;
+    font-size: 28px;
+    margin-top: 15px;
+    color: #ec4899;
 }
 
 .focus-mode .card:not(:first-child) {
     display: none;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
 }
